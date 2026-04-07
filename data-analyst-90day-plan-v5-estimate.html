@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>90-Day Data Analyst Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --accent: #00C896;
+  --accent-dim: #00A87A;
+  --bg: #0A0F1E;
+  --bg-secondary: #0C1220;
+  --card: #111827;
+  --card-border: #1E2A3A;
+  --text: #E8EDF5;
+  --text-secondary: #c8d8e8;
+  --muted: #8899AA;
+  --gold: #F5C842;
+  --blue: #4A9EFF;
+  --purple: #A78BFA;
+  --red: #FF6B6B;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Light Theme ─────────────────────────── */
+[data-theme="light"] {
+  --bg: #F3F5F8;
+  --bg-secondary: #E8ECF2;
+  --card: #FFFFFF;
+  --card-border: #D8DEE8;
+  --text: #1A2332;
+  --text-secondary: #4A5568;
+  --muted: #718096;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ── Scrollbar ───────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 3px; }
+
+/* ── Header ──────────────────────────────── */
+.header {
+  background: linear-gradient(135deg, #0D1B2A 0%, #0A0F1E 50%, #0D1427 100%);
+  border-bottom: 1px solid var(--card-border);
+  padding: 32px 24px 24px;
+  position: relative;
+  transition: background var(--transition);
+}
+[data-theme="light"] .header {
+  background: linear-gradient(135deg, #E8F5E9 0%, #F3F5F8 50%, #E3F2FD 100%);
+}
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.header-icon { font-size: 28px; }
+.header-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(22px, 4vw, 38px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text);
+}
+h1 .accent { color: var(--accent); }
+h1 .subtitle {
+  font-size: 0.55em;
+  color: var(--muted);
+  font-style: italic;
+  font-weight: 500;
+}
+.header-desc {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 600px;
+}
+.header-quote {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--accent);
+  background: rgba(0,200,150,0.05);
+  border-radius: 0 8px 8px 0;
+  max-width: 600px;
+  animation: quoteFade 0.6s ease;
+}
+@keyframes quoteFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.header-quote .quote-text {
+  font-size: 14px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.6;
+}
+.header-quote .quote-author {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.header-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.header-tag {
+  background: rgba(0,200,150,0.08);
+  border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 12px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+}
+
+/* ── Theme Toggle ────────────────────────── */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 50px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  transition: all var(--transition);
+  z-index: 20;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+
+/* ── Progress Bar ────────────────────────── */
+.progress-container {
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+  padding: 12px 24px;
+}
+.progress-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.progress-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 120px;
+}
+.progress-label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.progress-stats {
+  font-size: 12px;
+  color: var(--muted);
+}
+.progress-bar-wrapper {
+  flex: 1;
+  background: var(--bg-secondary);
+  border-radius: 50px;
+  height: 10px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+.streak-badge {
+  background: rgba(245,200,66,0.12);
+  border: 1px solid rgba(245,200,66,0.3);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  color: var(--gold);
+  white-space: nowrap;
+  font-weight: 600;
+}
+.estimate-badge {
+  background: rgba(74,158,255,0.08);
+  border: 1px solid rgba(74,158,255,0.25);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--blue);
+  white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── XP & Level System ───────────────────── */
+.xp-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.level-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.4s ease;
+}
+.level-badge .level-icon { font-size: 16px; }
+.level-badge .level-name {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+.level-badge .level-num {
+  background: rgba(0,200,150,0.15);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+.level-badge.beginner { border-color: rgba(0,200,150,0.3); }
+.level-badge.beginner .level-name { color: var(--accent); }
+.level-badge.intermediate { border-color: rgba(74,158,255,0.3); }
+.level-badge.intermediate .level-name { color: var(--blue); }
+.level-badge.intermediate .level-num { background: rgba(74,158,255,0.15); color: var(--blue); }
+.level-badge.advanced { border-color: rgba(167,139,250,0.3); }
+.level-badge.advanced .level-name { color: var(--purple); }
+.level-badge.advanced .level-num { background: rgba(167,139,250,0.15); color: var(--purple); }
+.level-badge.expert { border-color: rgba(245,200,66,0.3); }
+.level-badge.expert .level-name { color: var(--gold); }
+.level-badge.expert .level-num { background: rgba(245,200,66,0.15); color: var(--gold); }
+
+.xp-bar-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.xp-bar-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.xp-bar-track {
+  height: 6px;
+  background: var(--bg-secondary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+.xp-bar-fill.beginner { background: linear-gradient(90deg, #00C896, #00E6A8); }
+.xp-bar-fill.intermediate { background: linear-gradient(90deg, #4A9EFF, #6CB4FF); }
+.xp-bar-fill.advanced { background: linear-gradient(90deg, #A78BFA, #C4B5FD); }
+.xp-bar-fill.expert { background: linear-gradient(90deg, #F5C842, #FFD700); }
+
+.xp-total {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+
+/* ── XP Popup (floating +xp) ─────────────── */
+.xp-float {
+  position: fixed;
+  pointer-events: none;
+  font-size: 18px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  z-index: 9999;
+  animation: xpFloat 1.2s ease-out forwards;
+}
+@keyframes xpFloat {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  50% { opacity: 1; transform: translateY(-40px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+}
+
+/* ── Level Up Modal ──────────────────────── */
+.levelup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeInOverlay 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+@keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+.levelup-card {
+  background: var(--card);
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  padding: 40px 48px;
+  text-align: center;
+  animation: levelUpPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 360px;
+  width: 90%;
+}
+@keyframes levelUpPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.levelup-card .lu-emoji { font-size: 48px; margin-bottom: 12px; }
+.levelup-card .lu-title {
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.levelup-card .lu-level {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.levelup-card .lu-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.levelup-card .lu-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.2s;
+}
+.levelup-card .lu-btn:hover { transform: scale(1.05); }
+
+/* ── Achievement Badges ──────────────────── */
+.achievements-bar {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 6px 24px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+}
+.achievements-bar::-webkit-scrollbar { display: none; }
+.ach-label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ach-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  border: 2px solid var(--card-border);
+  background: var(--card);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+.ach-icon.unlocked {
+  opacity: 1;
+  filter: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(245,200,66,0.3);
+}
+.ach-icon:hover {
+  transform: scale(1.15);
+}
+.ach-icon .ach-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.ach-icon .ach-tooltip .ach-t-name {
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.ach-icon .ach-tooltip .ach-t-desc {
+  color: var(--muted);
+  font-size: 10px;
+}
+.ach-icon:hover .ach-tooltip { display: block; }
+
+/* Achievement Toast */
+.ach-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10001;
+  box-shadow: 0 8px 32px rgba(245,200,66,0.2);
+  animation: achToastIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), achToastOut 0.4s ease 2.6s forwards;
+  max-width: 340px;
+}
+@keyframes achToastIn { from { transform: translateX(120%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes achToastOut { to { transform: translateX(120%); opacity: 0; } }
+.ach-toast .ach-toast-icon { font-size: 28px; flex-shrink: 0; }
+.ach-toast .ach-toast-text { flex: 1; }
+.ach-toast .ach-toast-title {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 2px;
+}
+.ach-toast .ach-toast-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── Search Bar ──────────────────────────── */
+.search-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 10px 16px;
+  gap: 10px;
+  transition: border-color var(--transition);
+}
+.search-box:focus-within { border-color: var(--accent); }
+.search-box .search-icon { font-size: 16px; color: var(--muted); flex-shrink: 0; }
+.search-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+}
+.search-box input::placeholder { color: var(--muted); }
+.search-box .search-clear {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  display: none;
+  padding: 0;
+}
+.search-box .search-clear.visible { display: block; }
+.search-results-count {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px 0 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Tab Bar ─────────────────────────────── */
+.tab-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background var(--transition);
+}
+.tab-bar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+.tab-bar-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  padding: 14px 18px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all var(--transition);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  border-bottom-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Main Container ──────────────────────── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ── Phase Selector ──────────────────────── */
+.phase-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.phase-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition);
+  color: var(--text);
+}
+.phase-card:hover { border-color: var(--muted); transform: translateY(-1px); }
+.phase-card .phase-icon { font-size: 18px; margin-bottom: 4px; }
+.phase-card .phase-title {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+}
+.phase-card .phase-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 2px;
+  color: var(--text);
+}
+.phase-card .phase-weeks {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.phase-card .phase-progress {
+  margin-top: 8px;
+  height: 4px;
+  background: var(--bg-secondary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.phase-card .phase-progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.phase-card[data-color="accent"].active { background: rgba(0,200,150,0.12); border-color: var(--accent); }
+.phase-card[data-color="accent"] .phase-title { color: var(--accent); }
+.phase-card[data-color="accent"] .phase-progress-fill { background: var(--accent); }
+
+.phase-card[data-color="blue"].active { background: rgba(74,158,255,0.12); border-color: var(--blue); }
+.phase-card[data-color="blue"] .phase-title { color: var(--blue); }
+.phase-card[data-color="blue"] .phase-progress-fill { background: var(--blue); }
+
+.phase-card[data-color="purple"].active { background: rgba(167,139,250,0.12); border-color: var(--purple); }
+.phase-card[data-color="purple"] .phase-title { color: var(--purple); }
+.phase-card[data-color="purple"] .phase-progress-fill { background: var(--purple); }
+
+.phase-card[data-color="gold"].active { background: rgba(245,200,66,0.12); border-color: var(--gold); }
+.phase-card[data-color="gold"] .phase-title { color: var(--gold); }
+.phase-card[data-color="gold"] .phase-progress-fill { background: var(--gold); }
+
+/* ── Phase Header ────────────────────────── */
+.phase-header {
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+.phase-header .label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+.phase-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ── Week Accordion ──────────────────────── */
+.week-item { margin-bottom: 12px; }
+.week-btn {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition);
+  font-family: inherit;
+}
+.week-btn:hover { border-color: var(--muted); }
+.week-btn .week-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.week-btn .week-label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+}
+.week-btn .week-title {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.week-btn .week-goal {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.week-btn .week-progress-mini {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.week-btn .arrow {
+  font-size: 16px;
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+.week-btn.expanded .arrow { transform: rotate(180deg); }
+
+/* ── Day Accordion ───────────────────────── */
+.days-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-top: none;
+  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 4px 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+.days-container.open {
+  max-height: 4000px;
+  opacity: 1;
+}
+
+.day-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(30,42,58,0.15);
+  padding: 14px 20px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--transition);
+  font-family: inherit;
+  min-height: 48px;
+}
+.day-btn:hover { background: rgba(255,255,255,0.03); }
+[data-theme="light"] .day-btn:hover { background: rgba(0,0,0,0.03); }
+.day-btn .day-left {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.day-btn .day-check {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--card-border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all var(--transition);
+  cursor: pointer;
+  background: transparent;
+}
+.day-btn .day-check:hover { border-color: var(--accent); }
+.day-btn .day-check.done {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.day-btn .day-num {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 50px;
+  flex-shrink: 0;
+}
+.day-btn .day-topic {
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.day-btn .day-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+.day-btn .day-time {
+  font-size: 10px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(255,255,255,0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+[data-theme="light"] .day-btn .day-time { background: rgba(0,0,0,0.05); }
+.day-btn .day-diff {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+.day-diff.easy { color: var(--accent); background: rgba(0,200,150,0.12); }
+.day-diff.medium { color: var(--gold); background: rgba(245,200,66,0.12); }
+.day-diff.hard { color: var(--red); background: rgba(255,107,107,0.12); }
+.day-btn .day-plus {
+  font-size: 14px;
+  color: var(--muted);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.day-details {
+  padding: 0;
+  background: rgba(0,0,0,0.15);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
+}
+[data-theme="light"] .day-details { background: rgba(0,0,0,0.03); }
+.day-details.open {
+  max-height: 800px;
+  padding: 12px 20px 16px 20px;
+}
+
+.day-details .tasks-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.task-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+.task-row .diamond {
+  font-size: 12px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.task-row .task-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.resource-box {
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 12px;
+}
+.resource-box .res-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.resource-box .res-link {
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.resource-box .res-link:hover { text-decoration: underline; }
+
+/* ── Notes Feature ───────────────────────── */
+.notes-section {
+  margin-top: 12px;
+  border-top: 1px solid var(--card-border);
+  padding-top: 10px;
+}
+.notes-label {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.notes-textarea {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--text);
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  resize: vertical;
+  min-height: 40px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.notes-textarea:focus { border-color: var(--accent); }
+.notes-textarea::placeholder { color: var(--muted); }
+
+/* ── Search Results ──────────────────────── */
+.search-result-item {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.search-result-item:hover { border-color: var(--accent); transform: translateY(-1px); }
+.search-result-item .sr-day {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.search-result-item .sr-topic {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.search-result-item .sr-preview {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.search-result-item .sr-preview mark {
+  background: rgba(0,200,150,0.25);
+  color: var(--text);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+/* ── Next Steps Section ──────────────────── */
+.next-steps {
+  background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(74,158,255,0.06));
+  border: 1px solid rgba(0,200,150,0.3);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 24px;
+}
+.next-steps h3 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+.next-step-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.next-step-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.next-step-info h4 {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.next-step-info p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── Color helpers ───────────────────────── */
+.color-accent { color: var(--accent); }
+.color-blue { color: var(--blue); }
+.color-purple { color: var(--purple); }
+.color-gold { color: var(--gold); }
+
+.bg-accent-08 { background: rgba(0,200,150,0.08); border-color: rgba(0,200,150,0.25); }
+.bg-blue-08 { background: rgba(74,158,255,0.08); border-color: rgba(74,158,255,0.25); }
+.bg-purple-08 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); }
+.bg-gold-08 { background: rgba(245,200,66,0.08); border-color: rgba(245,200,66,0.25); }
+
+.week-btn.bg-accent-12 { background: rgba(0,200,150,0.06); border-color: rgba(0,200,150,0.4); }
+.week-btn.bg-blue-12 { background: rgba(74,158,255,0.06); border-color: rgba(74,158,255,0.4); }
+.week-btn.bg-purple-12 { background: rgba(167,139,250,0.06); border-color: rgba(167,139,250,0.4); }
+.week-btn.bg-gold-12 { background: rgba(245,200,66,0.06); border-color: rgba(245,200,66,0.4); }
+
+/* ── Projects Tab ────────────────────────── */
+.projects-header h2 {
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.projects-header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  transition: all var(--transition);
+}
+.project-card:hover { border-color: var(--muted); transform: translateY(-1px); }
+.project-icon {
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.project-info { flex: 1; }
+.project-title-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.project-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.project-tool {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.project-week {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.project-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.portfolio-tip {
+  background: rgba(245,200,66,0.08);
+  border: 1px solid rgba(245,200,66,0.3);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+.portfolio-tip .tip-title {
+  font-size: 14px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.portfolio-tip .tip-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* ── Resources Tab ───────────────────────── */
+.resources-header h2 {
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.resources-header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.resource-section {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  transition: all var(--transition);
+}
+.resource-section:hover { border-color: var(--muted); }
+.resource-section .cat-label {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.resource-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+.resource-item .bullet {
+  font-size: 12px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.resource-item .item-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Job Prep Tab ────────────────────────── */
+.job-header h2 {
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+.job-header p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+.job-section {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin-bottom: 14px;
+}
+.job-section .section-label {
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+.checklist-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 7px;
+  align-items: flex-start;
+}
+.checklist-row .check {
+  font-size: 14px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.checklist-row .check-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.interview-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+.interview-tag {
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.interview-q {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.apply-item {
+  border-left: 2px solid;
+  padding-left: 14px;
+  margin-bottom: 10px;
+}
+.apply-item .apply-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.apply-item .apply-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.schedule-box {
+  background: linear-gradient(135deg, rgba(0,200,150,0.06), rgba(74,158,255,0.06));
+  border: 1px solid rgba(0,200,150,0.3);
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.schedule-box .sched-label {
+  font-size: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.schedule-row {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.schedule-row .sched-time {
+  font-size: 12px;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  min-width: 100px;
+  margin-top: 1px;
+}
+.schedule-row .sched-task {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ── Footer ──────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--card-border);
+  padding: 20px 24px;
+  text-align: center;
+}
+.footer p {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+/* ── Tab content visibility ──────────────── */
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ── Keyboard focus ──────────────────────── */
+.day-btn:focus-visible, .week-btn:focus-visible, .phase-card:focus-visible, .tab-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Responsive ──────────────────────────── */
+@media (max-width: 600px) {
+  .phase-selector { grid-template-columns: 1fr; }
+  .header-tags { gap: 6px; }
+  .header-tag { font-size: 11px; padding: 4px 10px; }
+  .tab-btn { padding: 12px 12px; font-size: 11px; }
+  .theme-toggle { top: 12px; right: 12px; padding: 4px 8px; font-size: 16px; }
+  .progress-inner { flex-wrap: wrap; }
+  .progress-info { min-width: auto; }
+  .day-btn { padding: 12px 14px; }
+  .day-btn .day-left { gap: 8px; }
+  .day-btn .day-meta { flex-direction: column; gap: 4px; }
+  .streak-badge { order: -1; width: 100%; text-align: center; }
+  .estimate-badge { order: 0; width: 100%; text-align: center; }
+  .xp-container { flex-wrap: wrap; padding: 0 12px 8px; gap: 8px; }
+  .xp-bar-wrapper { order: 3; width: 100%; }
+  .search-container { padding: 12px 12px 0; }
+}
+
+/* ── Print Styles ────────────────────────── */
+@media print {
+  .header, .tab-bar, .theme-toggle, .search-container, .progress-container,
+  .xp-container, .achievements-bar,
+  .phase-selector, .day-check, .notes-section, .day-meta, .day-plus, .arrow { display: none !important; }
+  body { background: #fff; color: #111; font-size: 11pt; }
+  .container { max-width: 100%; padding: 0; }
+  .tab-content { display: block !important; }
+  .days-container { max-height: none !important; opacity: 1 !important; display: block !important; }
+  .day-details { max-height: none !important; padding: 8px 12px !important; }
+  .week-btn { border: 1px solid #ccc; page-break-inside: avoid; }
+  .day-btn { border-bottom: 1px solid #eee; }
+  .resource-box { background: #f5f5f5 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+  <div class="header-inner">
+    <div class="header-top">
+      <span class="header-icon">📊</span>
+      <span class="header-label">90-Day Roadmap</span>
+    </div>
+    <h1>
+      Become a <span class="accent">Data Analyst</span><br>
+      <span class="subtitle">while working a full-time job</span>
+    </h1>
+    <p class="header-desc">A complete, practical, day-by-day plan. No experience required. 2–3 hours/day. Job-ready in 90 days.</p>
+    <div class="header-quote" id="header-quote">
+      <div class="quote-text" id="quote-text"></div>
+      <div class="quote-author" id="quote-author"></div>
+    </div>
+    <div class="header-tags">
+      <div class="header-tag"><span>⏱</span><span>2–3 hrs/day</span></div>
+      <div class="header-tag"><span>🗓</span><span>90 Days</span></div>
+      <div class="header-tag"><span>🛠</span><span>Excel + SQL + Power BI</span></div>
+      <div class="header-tag"><span>💼</span><span>9 Portfolio Projects</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Progress Bar -->
+<div class="progress-container">
+  <div class="progress-inner">
+    <div class="progress-info">
+      <span class="progress-label" id="progress-label">DAY 0 / 90</span>
+      <span class="progress-stats" id="progress-stats">0% complete</span>
+    </div>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div class="streak-badge" id="streak-badge">🔥 0 day streak</div>
+    <div class="estimate-badge" id="estimate-badge">📅 —</div>
+  </div>
+</div>
+
+<!-- XP & Level Bar -->
+<div class="xp-container">
+  <div class="level-badge beginner" id="level-badge">
+    <span class="level-icon" id="level-icon">🌱</span>
+    <span class="level-name" id="level-name">BEGINNER</span>
+    <span class="level-num" id="level-num">Lv 1</span>
+  </div>
+  <div class="xp-bar-wrapper">
+    <div class="xp-bar-info">
+      <span id="xp-current-label">0 XP</span>
+      <span id="xp-next-label">200 XP to next level</span>
+    </div>
+    <div class="xp-bar-track">
+      <div class="xp-bar-fill beginner" id="xp-bar-fill"></div>
+    </div>
+  </div>
+  <div class="xp-total" id="xp-total">⚡ 0 XP</div>
+</div>
+
+<!-- Achievement Badges Bar -->
+<div class="achievements-bar" id="achievements-bar">
+  <span class="ach-label">BADGES</span>
+</div>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <button class="tab-btn active" data-tab="plan" tabindex="0">📅 90-Day Plan</button>
+    <button class="tab-btn" data-tab="projects" tabindex="0">🗂 Projects</button>
+    <button class="tab-btn" data-tab="resources" tabindex="0">🔗 Resources</button>
+    <button class="tab-btn" data-tab="jobs" tabindex="0">💼 Job Prep</button>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="search-container" id="search-container">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search days, topics, tasks... (Ctrl+K)" autocomplete="off">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+  <div class="search-results-count" id="search-results-count" style="display:none"></div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+  <!-- Search Results (hidden by default) -->
+  <div id="search-results" style="display:none"></div>
+
+  <!-- PLAN TAB -->
+  <div id="tab-plan" class="tab-content active"></div>
+
+  <!-- PROJECTS TAB -->
+  <div id="tab-projects" class="tab-content"></div>
+
+  <!-- RESOURCES TAB -->
+  <div id="tab-resources" class="tab-content"></div>
+
+  <!-- JOB PREP TAB -->
+  <div id="tab-jobs" class="tab-content"></div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>90-Day Data Analyst Roadmap • Built for beginners • 2–3 hours/day • 100% free resources</p>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+
+const phases = [
+  {
+    id: 1,
+    title: "PHASE 1",
+    subtitle: "Excel Foundations",
+    weeks: "Week 1–4 (Days 1–28)",
+    color: "accent",
+    icon: "📊",
+    weeks_data: [
+      {
+        week: 1,
+        title: "Excel Basics — Navigation, Formulas, Formatting",
+        goal: "Get comfortable with Excel interface and basic formulas",
+        days: [
+          { day: 1, topic: "Excel Interface & Navigation", difficulty: "easy", time: "2h", tasks: ["Open Excel, explore ribbon, rows/columns, cells", "Learn Ctrl+Z, Ctrl+C, Ctrl+V, Ctrl+S shortcuts", "Practice: Create a sample grocery list table"], resource: "Leila Gharani – Excel Basics (YouTube)" },
+          { day: 2, topic: "Data Entry & Cell Formatting", difficulty: "easy", time: "2h", tasks: ["Enter numbers, text, dates in cells", "Format: Bold, colors, borders, cell size", "Practice: Format your grocery list table nicely"], resource: "ExcelJet.net – formatting guide" },
+          { day: 3, topic: "Basic Formulas: SUM, AVERAGE, COUNT", difficulty: "easy", time: "2.5h", tasks: ["Learn =SUM(), =AVERAGE(), =COUNT()", "Understand relative vs absolute cell references ($A$1)", "Practice: Calculate totals & averages on a sales table"], resource: "Leila Gharani – Excel Formulas Playlist" },
+          { day: 4, topic: "IF, MIN, MAX, COUNTA", difficulty: "easy", time: "2h", tasks: ["Learn =IF(), =MIN(), =MAX(), =COUNTA()", "Practice: Create a student marks sheet with pass/fail logic"], resource: "Excel Campus – IF function tutorial" },
+          { day: 5, topic: "Basic Charts", difficulty: "easy", time: "2h", tasks: ["Create Bar chart, Line chart, Pie chart", "Learn when to use each chart type", "Practice: Make a monthly sales chart"], resource: "Kevin Stratvert – Excel Charts (YouTube)" },
+          { day: 6, topic: "MINI PROJECT 1", difficulty: "medium", time: "3h", tasks: ["Build a Personal Budget Tracker", "Columns: Category, Budget, Actual, Difference", "Use SUM, IF, color formatting", "Chart: Bar chart showing Budget vs Actual"], resource: "Self-project" },
+          { day: 7, topic: "Revision Day", difficulty: "easy", time: "1.5h", tasks: ["Redo any formula you felt unsure about", "Read back your Week 1 notes", "Quiz yourself: write 5 formulas from memory"], resource: "Your own notes" },
+        ]
+      },
+      {
+        week: 2,
+        title: "Excel Intermediate — VLOOKUP, Pivot Tables",
+        goal: "Master lookup functions and data summarization",
+        days: [
+          { day: 8, topic: "VLOOKUP & HLOOKUP", difficulty: "medium", time: "2.5h", tasks: ["Understand VLOOKUP syntax: =VLOOKUP(value, table, col, 0)", "Practice: Look up product prices from a price list table"], resource: "Leila Gharani – VLOOKUP tutorial" },
+          { day: 9, topic: "XLOOKUP & INDEX-MATCH", difficulty: "medium", time: "2.5h", tasks: ["Learn =XLOOKUP() as modern alternative", "Learn =INDEX(MATCH()) for advanced lookups", "Practice: Compare results from VLOOKUP vs XLOOKUP"], resource: "ExcelJet – XLOOKUP guide" },
+          { day: 10, topic: "Text Functions: LEFT, RIGHT, MID, TRIM, CONCATENATE", difficulty: "medium", time: "2h", tasks: ["Learn how to clean & split text data", "Practice: Extract first names from full names", "Practice: Combine city + country columns"], resource: "Chandoo.org – Text functions" },
+          { day: 11, topic: "Date Functions: TODAY, YEAR, MONTH, DATEDIF", difficulty: "medium", time: "2h", tasks: ["Learn =TODAY(), =YEAR(), =MONTH(), =DATEDIF()", "Practice: Calculate employee tenure from hire date"], resource: "Excel Campus – Date functions" },
+          { day: 12, topic: "Pivot Tables – Part 1", difficulty: "medium", time: "2.5h", tasks: ["Insert a Pivot Table from a sales dataset", "Group data by Category, Month, Region", "Drag fields to Rows, Columns, Values, Filters"], resource: "Kevin Stratvert – Pivot Tables (YouTube)" },
+          { day: 13, topic: "Pivot Tables – Part 2 + Pivot Charts", difficulty: "medium", time: "3h", tasks: ["Add calculated fields to Pivot Table", "Insert a Pivot Chart from your Pivot Table", "MINI PROJECT 2: Sales Summary Dashboard using Pivot Table"], resource: "Leila Gharani – Pivot Table advanced" },
+          { day: 14, topic: "Revision + Practice Day", difficulty: "easy", time: "1.5h", tasks: ["Redo VLOOKUP exercise from scratch", "Build a small lookup table for a product catalog", "Quiz: explain Pivot Table to yourself out loud"], resource: "Your notes" },
+        ]
+      },
+      {
+        week: 3,
+        title: "Excel Advanced Basics — Data Cleaning, Conditional Formatting",
+        goal: "Learn to clean messy data and use advanced features",
+        days: [
+          { day: 15, topic: "Data Cleaning Techniques", difficulty: "medium", time: "2h", tasks: ["Remove duplicates (Data → Remove Duplicates)", "Use Text to Columns to split data", "TRIM and CLEAN functions for whitespace"], resource: "ExcelJet – Data Cleaning tips" },
+          { day: 16, topic: "Conditional Formatting", difficulty: "medium", time: "2h", tasks: ["Highlight cells by value, top 10%, duplicates", "Use icon sets and color scales", "Practice: Highlight sales below target in red"], resource: "Leila Gharani – Conditional Formatting" },
+          { day: 17, topic: "Data Validation & Dropdown Lists", difficulty: "medium", time: "2h", tasks: ["Create dropdown menus in cells", "Add error alerts for invalid data entry", "Practice: Create an order form with dropdown categories"], resource: "Excel Campus – Data Validation" },
+          { day: 18, topic: "COUNTIF, SUMIF, AVERAGEIF", difficulty: "medium", time: "2.5h", tasks: ["Learn =COUNTIF(), =SUMIF(), =AVERAGEIF()", "Practice: Count orders > $500, sum sales by region"], resource: "Leila Gharani – COUNTIF/SUMIF" },
+          { day: 19, topic: "Named Ranges & Tables (Ctrl+T)", difficulty: "easy", time: "2h", tasks: ["Convert data to Excel Table (Ctrl+T)", "Use structured references like Table1[Sales]", "Create Named Ranges for cleaner formulas"], resource: "ExcelJet – Excel Tables guide" },
+          { day: 20, topic: "MINI PROJECT 3: HR Data Analysis", difficulty: "medium", time: "3h", tasks: ["Dataset: 50 employee records (Name, Dept, Salary, Hire Date)", "Calculate: Avg salary by dept, tenure, headcount by dept", "Visualize: Charts + conditional formatting on salary ranges"], resource: "Use Kaggle free HR dataset" },
+          { day: 21, topic: "Excel Revision Day", difficulty: "easy", time: "1.5h", tasks: ["Review all 3 weeks", "List your 3 weakest areas and re-practice them", "Take a free online Excel quiz (testdome.com/tests/excel)"], resource: "TestDome Excel Quiz" },
+        ]
+      },
+      {
+        week: 4,
+        title: "Excel Capstone + Introduction to SQL",
+        goal: "Complete Excel capstone project and begin SQL",
+        days: [
+          { day: 22, topic: "Excel Capstone Project (Day 1)", difficulty: "hard", time: "3h", tasks: ["Download a real dataset from Kaggle (Superstore Sales)", "Clean the data: remove blanks, fix formats, remove duplicates", "Create summary Pivot Tables for Sales by Region, Category, Month"], resource: "Kaggle – Superstore Dataset" },
+          { day: 23, topic: "Excel Capstone Project (Day 2)", difficulty: "hard", time: "3h", tasks: ["Build charts: Monthly trend line, Top 10 products bar chart, Region pie chart", "Add conditional formatting to highlight top/bottom performers", "Create a clean 1-page summary layout"], resource: "Kaggle – Superstore Dataset" },
+          { day: 24, topic: "Excel Capstone – Polish + Document", difficulty: "medium", time: "2h", tasks: ["Add a title, your name, and date", "Write 3 insights from the data (text boxes)", "Save as: Excel_Project_YourName.xlsx for resume"], resource: "Self" },
+          { day: 25, topic: "SQL Introduction – What is SQL?", difficulty: "easy", time: "2h", tasks: ["Understand databases, tables, rows, columns", "Install DB Browser for SQLite (free)", "Run your first query: SELECT * FROM table_name"], resource: "w3schools.com/sql – Intro + SELECT" },
+          { day: 26, topic: "SQL: SELECT, WHERE, ORDER BY", difficulty: "easy", time: "2.5h", tasks: ["Learn SELECT columns, WHERE conditions, ORDER BY", "Practice on w3schools SQL Try-It editor online", "Exercise: Find all customers from 'Germany' ordered by name"], resource: "w3schools.com/sql" },
+          { day: 27, topic: "SQL: AND, OR, NOT, DISTINCT, LIMIT", difficulty: "easy", time: "2h", tasks: ["Filter with AND, OR, NOT operators", "Use DISTINCT to remove duplicates", "LIMIT to show top N rows", "Practice: Top 5 most expensive products"], resource: "SQLZoo.net – Tutorial 1 & 2" },
+          { day: 28, topic: "Week 4 Revision", difficulty: "easy", time: "1.5h", tasks: ["Revise all SQL covered so far", "Write 5 SELECT queries from memory", "Re-open your Excel capstone and check for any errors"], resource: "Your notes" },
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "PHASE 2",
+    subtitle: "SQL Mastery",
+    weeks: "Week 5–8 (Days 29–56)",
+    color: "blue",
+    icon: "🗄️",
+    weeks_data: [
+      {
+        week: 5,
+        title: "SQL Core — Aggregation & Grouping",
+        goal: "Learn to summarize and analyze data with SQL",
+        days: [
+          { day: 29, topic: "SQL: COUNT, SUM, AVG, MIN, MAX", difficulty: "easy", time: "2h", tasks: ["Aggregate functions on real tables", "Practice: Total sales, average price, count of orders"], resource: "w3schools.com/sql/sql_count.asp" },
+          { day: 30, topic: "SQL: GROUP BY & HAVING", difficulty: "medium", time: "2.5h", tasks: ["Group data with GROUP BY", "Filter groups with HAVING (not WHERE!)", "Practice: Total sales by country, filter countries with >$10,000"], resource: "SQLZoo – SUM and COUNT tutorial" },
+          { day: 31, topic: "SQL: JOINS – INNER JOIN", difficulty: "medium", time: "2.5h", tasks: ["Understand why JOINs exist (linking tables)", "Write INNER JOIN between Orders and Customers tables", "Practice: Show customer name + their order details"], resource: "w3schools.com/sql/sql_join_inner.asp" },
+          { day: 32, topic: "SQL: LEFT JOIN, RIGHT JOIN", difficulty: "medium", time: "2.5h", tasks: ["Understand LEFT JOIN (keep all left table rows)", "When to use LEFT vs INNER JOIN", "Practice: Show all customers including those with no orders"], resource: "SQLZoo – The JOIN operation" },
+          { day: 33, topic: "SQL: CASE WHEN (IF-ELSE in SQL)", difficulty: "medium", time: "2h", tasks: ["Write CASE WHEN THEN ELSE END statements", "Practice: Label orders as 'High', 'Medium', 'Low' by value", "Practice: Classify customers by purchase frequency"], resource: "w3schools.com – CASE" },
+          { day: 34, topic: "SQL Practice Day", difficulty: "medium", time: "2.5h", tasks: ["Do 10 exercises on SQLZoo (SELECT/JOIN sections)", "Time yourself: write each query without looking at notes", "Fix any errors you make – read the error messages carefully"], resource: "sqlzoo.net" },
+          { day: 35, topic: "Week 5 Revision", difficulty: "easy", time: "1.5h", tasks: ["Write a cheat sheet: All SQL learned so far", "Redo your favorite 5 queries from memory"], resource: "Your notes" },
+        ]
+      },
+      {
+        week: 6,
+        title: "SQL Intermediate — Subqueries, String Functions",
+        goal: "Write more complex queries for real business questions",
+        days: [
+          { day: 36, topic: "Subqueries (queries inside queries)", difficulty: "hard", time: "2.5h", tasks: ["Write subquery in WHERE clause", "Practice: Find customers who spent more than the average customer", "Practice: Find products with price above category average"], resource: "w3schools – Subqueries" },
+          { day: 37, topic: "SQL String Functions", difficulty: "medium", time: "2h", tasks: ["UPPER, LOWER, LENGTH, TRIM, REPLACE, SUBSTRING", "Practice: Clean messy name columns", "Practice: Extract first word from product description"], resource: "w3schools SQL String Functions" },
+          { day: 38, topic: "SQL Date Functions", difficulty: "medium", time: "2h", tasks: ["YEAR(), MONTH(), DAY(), DATEDIFF(), NOW()", "Practice: Orders placed in 2023, orders from last 30 days", "Calculate customer tenure from join date"], resource: "w3schools – Date Functions" },
+          { day: 39, topic: "Window Functions: ROW_NUMBER, RANK", difficulty: "hard", time: "3h", tasks: ["Understand OVER() clause and PARTITION BY", "Write ROW_NUMBER() OVER (PARTITION BY...)", "Practice: Rank products by sales within each category"], resource: "Mode Analytics – Window Functions guide" },
+          { day: 40, topic: "Window Functions: LAG, LEAD, Running Totals", difficulty: "hard", time: "3h", tasks: ["Use LAG() to compare current vs previous row value", "SUM() OVER for running totals", "Practice: Month-over-month sales growth"], resource: "SQLZoo – Window Functions" },
+          { day: 41, topic: "SQL MINI PROJECT 1", difficulty: "hard", time: "3h", tasks: ["Download Chinook database (free SQLite DB)", "Write 10 queries answering business questions:", "  – Top 5 customers by spend", "  – Monthly revenue trend", "  – Best-selling artists", "  – Countries with highest invoices"], resource: "github.com/lerocha/chinook-database" },
+          { day: 42, topic: "SQL Revision Day", difficulty: "easy", time: "1.5h", tasks: ["Re-run all Chinook project queries", "Add comments to each query explaining what it does", "Post your queries in a Google Doc for your portfolio"], resource: "Your notes" },
+        ]
+      },
+      {
+        week: 7,
+        title: "SQL Project Week",
+        goal: "Build a portfolio-ready SQL project",
+        days: [
+          { day: 43, topic: "SQL Capstone: Choose Dataset", difficulty: "medium", time: "2h", tasks: ["Download from Kaggle: E-commerce Orders Dataset OR", "Use: COVID-19 Dataset OR Retail Sales Dataset", "Explore tables, understand relationships between tables"], resource: "Kaggle.com (free datasets)" },
+          { day: 44, topic: "SQL Capstone: Write Business Questions", difficulty: "medium", time: "2h", tasks: ["Write 15 business questions you want to answer", "Examples: Which region has highest returns?", "Which product category is most profitable?", "What time of year has the most sales?"], resource: "Self" },
+          { day: 45, topic: "SQL Capstone: Write Queries (Part 1)", difficulty: "hard", time: "3h", tasks: ["Answer questions 1–8 with SQL queries", "Make sure each query has a comment above it explaining the goal"], resource: "DB Browser for SQLite" },
+          { day: 46, topic: "SQL Capstone: Write Queries (Part 2)", difficulty: "hard", time: "3h", tasks: ["Answer questions 9–15", "Use at least 2 JOINs, 2 GROUP BYs, 1 window function", "Verify results make logical sense"], resource: "DB Browser for SQLite" },
+          { day: 47, topic: "SQL Capstone: Document Your Work", difficulty: "medium", time: "2h", tasks: ["Write a README: dataset, questions, key findings", "Screenshot your top 5 query results", "Save as SQL_Project_YourName.sql for resume"], resource: "GitHub (free account to post project)" },
+          { day: 48, topic: "SQL Interview Prep – Top 20 Questions", difficulty: "medium", time: "2.5h", tasks: ["Study: Difference between WHERE vs HAVING", "Study: INNER vs LEFT JOIN", "Study: How to find duplicates, Nth highest value", "Practice writing these from memory"], resource: "stratascratch.com (free SQL problems)" },
+          { day: 49, topic: "SQL Revision + Mock Interview", difficulty: "medium", time: "2h", tasks: ["Do 5 SQL problems on StrataScratch", "Time each one: aim for under 5 minutes per problem", "Review where you got stuck"], resource: "stratascratch.com" },
+        ]
+      },
+      {
+        week: 8,
+        title: "SQL Wrap-Up + Power BI Introduction",
+        goal: "Finalize SQL and begin Power BI",
+        days: [
+          { day: 50, topic: "SQL: Final Review", difficulty: "easy", time: "1.5h", tasks: ["Create a 1-page SQL cheat sheet", "List all commands, functions with examples", "Keep this for interview prep"], resource: "Your notes" },
+          { day: 51, topic: "Power BI: Installation & Orientation", difficulty: "easy", time: "2h", tasks: ["Download Power BI Desktop (free – powerbi.microsoft.com)", "Explore: Report view, Data view, Model view", "Watch: Power BI interface overview video"], resource: "Guy in a Cube – Power BI Beginners (YouTube)" },
+          { day: 52, topic: "Power BI: Import Data (Excel + CSV)", difficulty: "easy", time: "2h", tasks: ["Import an Excel file into Power BI", "Import a CSV file", "Check data types and column names in Power Query"], resource: "Microsoft Power BI docs – Get Data" },
+          { day: 53, topic: "Power BI: Power Query Basics", difficulty: "medium", time: "2.5h", tasks: ["Remove blank rows, change data types", "Split columns, rename columns", "Filter rows in Power Query Editor"], resource: "Leila Gharani – Power Query Beginners (YouTube)" },
+          { day: 54, topic: "Power BI: First Visuals", difficulty: "medium", time: "2.5h", tasks: ["Create: Bar chart, Line chart, Card visual, Table", "Resize and arrange visuals on a canvas", "Add a title to your report page"], resource: "Guy in a Cube – First Dashboard" },
+          { day: 55, topic: "Power BI: Slicers & Filters", difficulty: "medium", time: "2h", tasks: ["Add Date slicer, Category dropdown slicer", "Understand visual-level vs page-level filters", "Practice: Let user filter chart by year and region"], resource: "Leila Gharani – Slicers tutorial" },
+          { day: 56, topic: "Phase 2 Revision Day", difficulty: "easy", time: "1.5h", tasks: ["Review SQL cheat sheet one more time", "Review Power BI interface and your first visuals", "List 3 things you want to improve in Power BI"], resource: "Your notes" },
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "PHASE 3",
+    subtitle: "Power BI Mastery + Projects",
+    weeks: "Week 9–11 (Days 57–77)",
+    color: "purple",
+    icon: "📈",
+    weeks_data: [
+      {
+        week: 9,
+        title: "Power BI Core — DAX & Data Modeling",
+        goal: "Learn DAX formulas and connect multiple tables",
+        days: [
+          { day: 57, topic: "DAX Basics: Calculated Columns", difficulty: "medium", time: "2.5h", tasks: ["Understand DAX vs Excel formulas", "Create a calculated column: Profit = Sales - Cost", "Create: Full Name = First + \" \" + Last"], resource: "SQLBI – DAX for Beginners (YouTube)" },
+          { day: 58, topic: "DAX: Measures (SUM, AVERAGE, COUNT)", difficulty: "medium", time: "2.5h", tasks: ["Difference between Calculated Column and Measure", "Create: Total Sales = SUM(Orders[Sales])", "Create: Avg Order Value = AVERAGE(Orders[OrderValue])"], resource: "Guy in a Cube – DAX Measures" },
+          { day: 59, topic: "DAX: CALCULATE & Filters", difficulty: "hard", time: "3h", tasks: ["Most important DAX function: CALCULATE()", "Practice: Sales in East Region = CALCULATE(SUM(...), Region='East')", "Practice: YTD Sales using DATESYTD"], resource: "SQLBI – CALCULATE explained" },
+          { day: 60, topic: "Data Modeling: Relationships", difficulty: "medium", time: "2.5h", tasks: ["Understand Star Schema (Fact + Dimension tables)", "Create relationships between tables in Model view", "Practice: Connect Orders, Customers, Products tables"], resource: "Leila Gharani – Data Modeling Power BI" },
+          { day: 61, topic: "Power BI: Map Visual, KPI Visual, Gauge", difficulty: "medium", time: "2h", tasks: ["Add a Map visual with location data", "Create KPI visual (Target vs Actual)", "Add Gauge visual for progress tracking"], resource: "Microsoft Power BI visual gallery" },
+          { day: 62, topic: "Power BI: Drill-through & Tooltips", difficulty: "hard", time: "2.5h", tasks: ["Set up drill-through page (click bar → see detail)", "Create a custom tooltip page", "Practice: Click on a region → see product breakdown"], resource: "Guy in a Cube – Drill Through tutorial" },
+          { day: 63, topic: "Week 9 Revision", difficulty: "easy", time: "1.5h", tasks: ["Recreate 3 DAX measures from memory", "Check: are your table relationships correct?", "Write down 5 DAX formulas you will memorize"], resource: "Your notes" },
+        ]
+      },
+      {
+        week: 10,
+        title: "Power BI Dashboard Projects",
+        goal: "Build 2 complete, resume-worthy Power BI dashboards",
+        days: [
+          { day: 64, topic: "Dashboard Project 1: Sales Dashboard (Day 1)", difficulty: "medium", time: "3h", tasks: ["Dataset: Superstore Sales (Kaggle)", "Import into Power BI, clean in Power Query", "Create relationships: Orders ↔ Products ↔ Regions"], resource: "Kaggle – Superstore dataset" },
+          { day: 65, topic: "Dashboard Project 1: Sales Dashboard (Day 2)", difficulty: "hard", time: "3h", tasks: ["Build visuals: Monthly Sales trend, Top 10 Products, Sales by Region map", "Add KPI cards: Total Sales, Total Profit, Total Orders", "Add Year and Category slicers"], resource: "Self" },
+          { day: 66, topic: "Dashboard Project 1: Polish & Publish", difficulty: "medium", time: "2.5h", tasks: ["Add company logo placeholder, consistent colors, clean fonts", "Add page title and visual titles", "Publish to Power BI Service (free account)", "Screenshot for your resume/portfolio"], resource: "powerbi.microsoft.com (free account)" },
+          { day: 67, topic: "Dashboard Project 2: HR Analytics Dashboard (Day 1)", difficulty: "medium", time: "3h", tasks: ["Dataset: IBM HR Analytics (Kaggle – free)", "Explore: Attrition, Department, Age, Salary columns", "Clean and model the data in Power Query"], resource: "Kaggle – IBM HR Analytics" },
+          { day: 68, topic: "Dashboard Project 2: HR Dashboard (Day 2)", difficulty: "hard", time: "3h", tasks: ["Build: Attrition rate KPI, Department breakdown, Age histogram", "Add: Gender split, Job role satisfaction chart", "Slicers: Department, Job Level"], resource: "Self" },
+          { day: 69, topic: "Dashboard Project 2: Polish & Publish", difficulty: "medium", time: "2.5h", tasks: ["Apply consistent theme (use Format → Theme)", "Add insight text boxes: '23% attrition in Sales Dept'", "Publish and screenshot for portfolio"], resource: "Self" },
+          { day: 70, topic: "Power BI Practice + Review", difficulty: "easy", time: "2h", tasks: ["Review both dashboards – would a manager find these clear?", "List 3 improvements for each", "Write down 5 Power BI interview Q&As"], resource: "Your notes" },
+        ]
+      },
+      {
+        week: 11,
+        title: "Final Capstone Project",
+        goal: "Build your best portfolio project — end-to-end data analysis",
+        days: [
+          { day: 71, topic: "Capstone: Choose Dataset & Define Problem", difficulty: "medium", time: "2h", tasks: ["Choose ONE from: E-commerce, Finance, Healthcare, Sports", "Write a 5-sentence problem statement", "Identify 5 key questions to answer"], resource: "Kaggle.com" },
+          { day: 72, topic: "Capstone: Data Cleaning (Excel + SQL)", difficulty: "hard", time: "3h", tasks: ["Clean raw data in Excel first", "Move to SQL: write 10 analysis queries", "Document findings from SQL queries"], resource: "Self" },
+          { day: 73, topic: "Capstone: Power BI Dashboard (Day 1)", difficulty: "hard", time: "3h", tasks: ["Import cleaned data into Power BI", "Build your data model", "Create first 3 visuals"], resource: "Self" },
+          { day: 74, topic: "Capstone: Power BI Dashboard (Day 2)", difficulty: "hard", time: "3h", tasks: ["Complete all visuals (aim for 6–8 on the dashboard)", "Add slicers and drill-through", "Write DAX measures for key metrics"], resource: "Self" },
+          { day: 75, topic: "Capstone: Final Polish", difficulty: "medium", time: "2.5h", tasks: ["Apply professional theme and layout", "Add title page with your name, project name, date", "Write 5 key insights as text cards on the dashboard"], resource: "Self" },
+          { day: 76, topic: "Capstone: Document & Publish", difficulty: "medium", time: "2.5h", tasks: ["Write a project summary (200 words): problem, approach, insights", "Publish Power BI report online", "Upload SQL queries to GitHub", "Save Excel file with clean formatting"], resource: "github.com + powerbi.microsoft.com" },
+          { day: 77, topic: "Full Revision Day", difficulty: "easy", time: "1.5h", tasks: ["Review Excel, SQL, Power BI cheat sheets", "List all 5 projects you have completed", "Prepare your GitHub and portfolio link"], resource: "Your notes" },
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "PHASE 4",
+    subtitle: "Job Preparation",
+    weeks: "Week 12–13 (Days 78–90)",
+    color: "gold",
+    icon: "🚀",
+    weeks_data: [
+      {
+        week: 12,
+        title: "Resume, LinkedIn & Portfolio Setup",
+        goal: "Build a job-ready resume and online presence",
+        days: [
+          { day: 78, topic: "Resume Building – Structure", difficulty: "medium", time: "2.5h", tasks: ["Use a clean 1-page template (Novoresume.com free)", "Sections: Summary, Skills, Projects, Experience, Education", "Skills to list: Excel (Advanced), SQL, Power BI, Data Cleaning, Dashboard Design"], resource: "novoresume.com (free)" },
+          { day: 79, topic: "Resume – Projects Section", difficulty: "medium", time: "2h", tasks: ["Add all 5 projects with: Name, tools used, 2-line description, outcome", "Example: 'Built a Sales Dashboard in Power BI using 50K+ rows; identified top 3 revenue regions'", "Add GitHub link and Power BI published report link"], resource: "Self" },
+          { day: 80, topic: "Resume – Summary & Skills", difficulty: "easy", time: "1.5h", tasks: ["Write a 3-line professional summary: who you are, your skills, your goal", "Example: 'Aspiring Data Analyst with 3 months of hands-on experience in Excel, SQL, and Power BI. Passionate about turning raw data into actionable insights.'"], resource: "Self" },
+          { day: 81, topic: "LinkedIn Profile Setup", difficulty: "easy", time: "2h", tasks: ["Complete: Headline (Data Analyst | Excel | SQL | Power BI)", "About section: paste your resume summary", "Add Skills: Excel, SQL, Power BI, Data Analysis, Data Visualization", "Upload your best Power BI dashboard screenshot as a post"], resource: "linkedin.com" },
+          { day: 82, topic: "GitHub Portfolio Setup", difficulty: "easy", time: "2h", tasks: ["Create a GitHub account (free)", "Upload your SQL project files with a clear README", "Create a portfolio README.md listing all projects with descriptions", "Pin your best 3 repositories"], resource: "github.com" },
+          { day: 83, topic: "Job Research Day", difficulty: "easy", time: "2h", tasks: ["Search 'Data Analyst fresher' on Naukri, LinkedIn, Indeed", "Read 10 job descriptions carefully", "Write down the top 10 skills/tools mentioned most", "Compare with your skills – identify any gaps"], resource: "naukri.com, linkedin.com/jobs" },
+          { day: 84, topic: "Week 12 Revision", difficulty: "easy", time: "1.5h", tasks: ["Proofread resume 3 times (or ask a friend to review)", "Check all links work: GitHub, Power BI report", "Practice your 30-second self-introduction out loud"], resource: "Self" },
+        ]
+      },
+      {
+        week: 13,
+        title: "Interview Prep & Job Applications",
+        goal: "Be fully interview-ready and start applying",
+        days: [
+          { day: 85, topic: "Top Excel Interview Questions", difficulty: "medium", time: "2.5h", tasks: ["What is a Pivot Table? Explain with example.", "Difference between VLOOKUP and INDEX-MATCH?", "What is conditional formatting? Give a use case.", "How would you remove duplicates in Excel?", "Practice answering each OUT LOUD"], resource: "InterviewBit – Excel interview questions" },
+          { day: 86, topic: "Top SQL Interview Questions", difficulty: "medium", time: "2.5h", tasks: ["Difference between WHERE and HAVING?", "What is the difference between INNER JOIN and LEFT JOIN?", "How do you find the second highest salary?", "What are window functions? Give an example.", "Write these answers without notes, then check"], resource: "stratascratch.com – SQL practice" },
+          { day: 87, topic: "Top Power BI + General Analyst Questions", difficulty: "medium", time: "2.5h", tasks: ["What is DAX? Give 2 examples of measures you created.", "Explain your Sales Dashboard project end-to-end.", "What is a Star Schema?", "Walk me through how you would analyze a drop in sales.", "General: Tell me about yourself. Why Data Analyst?"], resource: "YouTube: Data Analyst mock interviews" },
+          { day: 88, topic: "Mock Interview Day", difficulty: "hard", time: "3h", tasks: ["Set a 30-minute timer. Answer all 15 questions as if in real interview.", "Record yourself on phone video", "Review: Were your answers clear? Confident? Concise?", "Fix your weakest 3 answers"], resource: "Self (phone camera)" },
+          { day: 89, topic: "Start Applying for Jobs", difficulty: "easy", time: "2h", tasks: ["Apply to 5 jobs today on Naukri/LinkedIn", "Use keywords from job descriptions in your resume", "Customize your resume summary for each role", "Send connection requests to 3 Data Analysts on LinkedIn and ask for advice"], resource: "naukri.com, linkedin.com" },
+          { day: 90, topic: "Day 90 — Reflect & Keep Going", difficulty: "easy", time: "1.5h", tasks: ["✅ You have completed the 90-day plan!", "Review: What are you most proud of?", "Continue: Apply to 5 jobs every day", "Continue: Do 2–3 SQL problems/week on StrataScratch", "Upgrade next: Consider Python (Pandas) or Advanced Power BI"], resource: "stratascratch.com, kaggle.com" },
+        ]
+      }
+    ]
+  }
+];
+
+const resources = [
+  { category: "Excel", items: ["Leila Gharani (YouTube) – Best Excel channel for beginners", "ExcelJet.net – Formula reference & practice", "Excel Campus (YouTube) – Deep dive tutorials", "Chandoo.org – Business Excel skills"] },
+  { category: "SQL", items: ["w3schools.com/sql – Interactive beginner reference", "SQLZoo.net – Hands-on SQL exercises with feedback", "StrataScratch.com – Real interview SQL problems (free tier)", "Mode Analytics SQL Tutorial – Free & well-structured"] },
+  { category: "Power BI", items: ["Guy in a Cube (YouTube) – #1 Power BI YouTube channel", "Leila Gharani (YouTube) – Power BI & DAX tutorials", "Microsoft Power BI Docs (docs.microsoft.com) – Official & free", "SQLBI.com – Advanced DAX (for when you're ready)"] },
+  { category: "Datasets & Practice", items: ["Kaggle.com – Free datasets for all projects", "Data.world – More free public datasets", "Chinook SQLite DB (GitHub) – Great SQL practice database", "Maven Analytics (free datasets) – Business-focused practice data"] },
+  { category: "Job Prep", items: ["Novoresume.com – Clean, free resume builder", "LinkedIn.com/jobs – Job applications + networking", "Naukri.com – India-focused job board", "GitHub.com – Host your project portfolio for free"] }
+];
+
+const projectsData = [
+  { num: 1, title: "Personal Budget Tracker", tool: "Excel", week: "Week 1", desc: "Track monthly income and expenses with formulas, charts, and conditional formatting." },
+  { num: 2, title: "Sales Summary Dashboard", tool: "Excel", week: "Week 2", desc: "Pivot Table analysis of sales data with charts, showing performance by region, product, and month." },
+  { num: 3, title: "HR Data Analysis", tool: "Excel", week: "Week 3", desc: "Analyze 50 employee records: salary stats, tenure calculation, headcount by department." },
+  { num: 4, title: "Superstore Sales Excel Report", tool: "Excel", week: "Week 4", desc: "End-to-end analysis of real Kaggle dataset: clean, analyze, and visualize in a 1-page layout." },
+  { num: 5, title: "Chinook Music DB Analysis", tool: "SQL", week: "Week 6", desc: "10+ business queries: top customers, revenue trends, best-selling artists." },
+  { num: 6, title: "SQL Business Analysis Project", tool: "SQL", week: "Week 7", desc: "15 business questions answered with SQL on a real Kaggle dataset. Documented and uploaded to GitHub." },
+  { num: 7, title: "Sales Analytics Dashboard", tool: "Power BI", week: "Week 10", desc: "Interactive Power BI dashboard on Superstore data: trends, KPIs, map, top products, slicers." },
+  { num: 8, title: "HR Analytics Dashboard", tool: "Power BI", week: "Week 10", desc: "Attrition analysis dashboard: KPIs, department breakdown, age distribution, job satisfaction." },
+  { num: 9, title: "Capstone: End-to-End Project", tool: "Excel + SQL + Power BI", week: "Week 11", desc: "Full data analysis project: raw data → cleaning → SQL analysis → Power BI dashboard. YOUR BEST PORTFOLIO PIECE." },
+];
+
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+const colorMap = { accent: '#00C896', blue: '#4A9EFF', purple: '#A78BFA', gold: '#F5C842' };
+const rgbMap = { accent: '0,200,150', blue: '74,158,255', purple: '167,139,250', gold: '245,200,66' };
+
+function esc(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+function getAllDays() {
+  const days = [];
+  phases.forEach(p => p.weeks_data.forEach(w => w.days.forEach(d => {
+    days.push({ ...d, phase: p, week: w, color: p.color });
+  })));
+  return days;
+}
+
+// ═══════════════════════════════════════════════
+// STATE + LOCALSTORAGE
+// ═══════════════════════════════════════════════
+let activePhase = 0;
+let expandedWeek = null;
+let expandedDay = null;
+let searchMode = false;
+
+function loadState(key, fallback) {
+  try { return JSON.parse(localStorage.getItem('da90_' + key)) || fallback; }
+  catch { return fallback; }
+}
+function saveState(key, val) {
+  localStorage.setItem('da90_' + key, JSON.stringify(val));
+}
+
+let completedDays = loadState('completed', []);
+let dayNotes = loadState('notes', {});
+let streakDates = loadState('streak', []);
+let totalXP = loadState('xp', 0);
+let shownLevelUps = loadState('shownLevelUps', []);
+let startDate = loadState('start_date', null);
+
+// XP & Level Configuration
+const XP_PER_DAY = { easy: 10, medium: 20, hard: 30 };
+const LEVELS = [
+  { name: 'Beginner',     icon: '🌱', minXP: 0,   level: 1, color: 'accent',      sub: 'Just getting started. Every expert was once a beginner.' },
+  { name: 'Intermediate', icon: '⚡', minXP: 200, level: 2, color: 'intermediate', sub: 'You know your way around Excel. SQL is calling.' },
+  { name: 'Advanced',     icon: '🔥', minXP: 500, level: 3, color: 'advanced',     sub: 'DAX, window functions, dashboards — you\'re dangerous.' },
+  { name: 'Expert',       icon: '💎', minXP: 900, level: 4, color: 'expert',       sub: 'You\'re job-ready. Time to prove it.' },
+];
+
+function getCurrentLevel() {
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (totalXP >= LEVELS[i].minXP) return LEVELS[i];
+  }
+  return LEVELS[0];
+}
+
+function getNextLevel() {
+  const current = getCurrentLevel();
+  const idx = LEVELS.indexOf(current);
+  return idx < LEVELS.length - 1 ? LEVELS[idx + 1] : null;
+}
+
+function recalcXP() {
+  // Recalculate XP from completed days (handles retroactive difficulty changes)
+  let xp = 0;
+  const allDays = getAllDays();
+  completedDays.forEach(dayNum => {
+    const d = allDays.find(x => x.day === dayNum);
+    if (d) xp += XP_PER_DAY[d.difficulty] || 10;
+  });
+  totalXP = xp;
+  saveState('xp', totalXP);
+}
+
+// Achievement System
+let unlockedAchievements = loadState('achievements', []);
+
+const ACHIEVEMENTS = [
+  { id: 'first_step',     icon: '👶', name: 'First Step',        desc: 'Complete your first day',            check: () => completedDays.length >= 1 },
+  { id: 'week_one',       icon: '🔥', name: 'Week One Warrior',  desc: 'Complete all 7 days of Week 1',      check: () => [1,2,3,4,5,6,7].every(d => completedDays.includes(d)) },
+  { id: 'two_weeks',      icon: '⚡', name: 'Two Weeks Strong',  desc: 'Complete 14 days',                   check: () => completedDays.length >= 14 },
+  { id: 'excel_master',   icon: '📊', name: 'Excel Master',      desc: 'Complete all of Phase 1 (28 days)',  check: () => Array.from({length:28}, (_,i)=>i+1).every(d => completedDays.includes(d)) },
+  { id: 'sql_starter',    icon: '🗄️', name: 'SQL Starter',       desc: 'Complete your first SQL day',        check: () => [25,26,27,28,29,30,31,32,33,34,35].some(d => completedDays.includes(d)) },
+  { id: 'sql_master',     icon: '🗃️', name: 'SQL Master',        desc: 'Complete all of Phase 2 (Days 29–56)', check: () => Array.from({length:28}, (_,i)=>i+29).every(d => completedDays.includes(d)) },
+  { id: 'halfway',        icon: '🎯', name: 'Halfway There',     desc: 'Complete 45 days (50%)',             check: () => completedDays.length >= 45 },
+  { id: 'powerbi_starter',icon: '📈', name: 'BI Explorer',       desc: 'Complete your first Power BI day',   check: () => [51,52,53,54,55,56].some(d => completedDays.includes(d)) },
+  { id: 'project_1',      icon: '🏗️', name: 'Builder',           desc: 'Complete a mini project day',        check: () => [6,13,20,41].some(d => completedDays.includes(d)) },
+  { id: 'streak_7',       icon: '🏅', name: '7-Day Streak',      desc: 'Study 7 days in a row',              check: () => calcStreak() >= 7 },
+  { id: 'streak_14',      icon: '🥇', name: '14-Day Streak',     desc: 'Study 14 days in a row',             check: () => calcStreak() >= 14 },
+  { id: 'streak_30',      icon: '🏆', name: '30-Day Streak',     desc: 'Study 30 days in a row',             check: () => calcStreak() >= 30 },
+  { id: 'speed_demon',    icon: '💨', name: 'Speed Demon',       desc: 'Complete 5 days in one day (reload to verify)', check: () => false }, // Manual special
+  { id: 'night_owl',      icon: '🦉', name: 'Night Owl',         desc: 'Complete a day after midnight',      check: () => { const h = new Date().getHours(); return h >= 0 && h < 5; } },
+  { id: 'early_bird',     icon: '🐦', name: 'Early Bird',        desc: 'Complete a day before 7 AM',         check: () => { const h = new Date().getHours(); return h >= 5 && h < 7; } },
+  { id: 'three_quarter',  icon: '🌟', name: '75% Club',          desc: 'Complete 67 days (75%)',             check: () => completedDays.length >= 67 },
+  { id: 'xp_500',         icon: '💎', name: 'XP Hunter',         desc: 'Earn 500 XP',                        check: () => totalXP >= 500 },
+  { id: 'xp_1000',        icon: '👑', name: 'XP King',           desc: 'Earn 1000 XP',                       check: () => totalXP >= 1000 },
+  { id: 'capstone',       icon: '🎓', name: 'Capstone Hero',     desc: 'Complete the final capstone week',   check: () => [71,72,73,74,75,76,77].every(d => completedDays.includes(d)) },
+  { id: 'ninety_days',    icon: '💎', name: 'All 90 Days',       desc: 'Complete every single day',          check: () => completedDays.length >= 90 },
+];
+
+function checkAchievements() {
+  let newUnlocks = [];
+  ACHIEVEMENTS.forEach(ach => {
+    if (!unlockedAchievements.includes(ach.id) && ach.check()) {
+      unlockedAchievements.push(ach.id);
+      newUnlocks.push(ach);
+    }
+  });
+  if (newUnlocks.length > 0) {
+    saveState('achievements', unlockedAchievements);
+    // Show toasts with delay
+    newUnlocks.forEach((ach, i) => {
+      setTimeout(() => showAchievementToast(ach), i * 800);
+    });
+  }
+  renderAchievements();
+}
+
+function renderAchievements() {
+  const bar = document.getElementById('achievements-bar');
+  let html = '<span class="ach-label">BADGES</span>';
+  ACHIEVEMENTS.forEach(ach => {
+    const isUnlocked = unlockedAchievements.includes(ach.id);
+    html += `<div class="ach-icon${isUnlocked ? ' unlocked' : ''}" title="${esc(ach.name)}">
+      ${ach.icon}
+      <div class="ach-tooltip">
+        <div class="ach-t-name">${isUnlocked ? '' : '🔒 '}${esc(ach.name)}</div>
+        <div class="ach-t-desc">${esc(ach.desc)}</div>
+      </div>
+    </div>`;
+  });
+  bar.innerHTML = html;
+}
+
+function showAchievementToast(ach) {
+  const toast = document.createElement('div');
+  toast.className = 'ach-toast';
+  toast.innerHTML = `
+    <span class="ach-toast-icon">${ach.icon}</span>
+    <div class="ach-toast-text">
+      <div class="ach-toast-title">🏅 ACHIEVEMENT UNLOCKED</div>
+      <div class="ach-toast-name">${esc(ach.name)}</div>
+    </div>`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3200);
+}
+
+function toggleDayComplete(day, e) {
+  e.stopPropagation();
+  const idx = completedDays.indexOf(day);
+  const prevLevel = getCurrentLevel();
+
+  if (idx > -1) {
+    completedDays.splice(idx, 1);
+  } else {
+    completedDays.push(day);
+    // Track streak
+    const today = new Date().toISOString().slice(0, 10);
+    if (!streakDates.includes(today)) streakDates.push(today);
+    if (streakDates.length > 90) streakDates = streakDates.slice(-90);
+
+    // Show floating XP popup
+    const allDays = getAllDays();
+    const dayData = allDays.find(d => d.day === day);
+    const xpGained = dayData ? (XP_PER_DAY[dayData.difficulty] || 10) : 10;
+    showXPFloat(e, xpGained);
+  }
+
+  // Recalc XP
+  recalcXP();
+  const newLevel = getCurrentLevel();
+
+  // Check for level up
+  if (idx === -1 && newLevel.level > prevLevel.level) {
+    const levelKey = 'level_' + newLevel.level;
+    if (!shownLevelUps.includes(levelKey)) {
+      shownLevelUps.push(levelKey);
+      saveState('shownLevelUps', shownLevelUps);
+      setTimeout(() => showLevelUpModal(newLevel), 600);
+    }
+  }
+
+  saveState('completed', completedDays);
+  saveState('streak', streakDates);
+  checkAchievements();
+  renderPlan();
+  updateProgress();
+}
+
+function showXPFloat(e, xp) {
+  const el = document.createElement('div');
+  el.className = 'xp-float';
+  el.textContent = `+${xp} XP`;
+  el.style.color = xp >= 30 ? '#F5C842' : xp >= 20 ? '#4A9EFF' : '#00C896';
+  // Position near the click
+  const rect = e.target.getBoundingClientRect ? e.target.getBoundingClientRect() : { left: e.clientX, top: e.clientY };
+  el.style.left = (rect.left || e.clientX) + 'px';
+  el.style.top = (rect.top || e.clientY - 10) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1300);
+}
+
+function showLevelUpModal(level) {
+  const overlay = document.createElement('div');
+  overlay.className = 'levelup-overlay';
+  overlay.innerHTML = `
+    <div class="levelup-card">
+      <div class="lu-emoji">${level.icon}</div>
+      <div class="lu-title">LEVEL UP!</div>
+      <div class="lu-level">${level.name}</div>
+      <div class="lu-sub">${level.sub}</div>
+      <button class="lu-btn" onclick="this.closest('.levelup-overlay').remove()">Let's Go! 🚀</button>
+    </div>`;
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+}
+
+function saveNote(day) {
+  const el = document.getElementById('note-' + day);
+  if (!el) return;
+  const val = el.value.trim();
+  if (val) { dayNotes[day] = val; }
+  else { delete dayNotes[day]; }
+  saveState('notes', dayNotes);
+}
+
+function calcStreak() {
+  if (streakDates.length === 0) return 0;
+  const sorted = [...streakDates].sort().reverse();
+  const today = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  if (sorted[0] !== today && sorted[0] !== yesterday) return 0;
+  let streak = 1;
+  for (let i = 1; i < sorted.length; i++) {
+    const diff = (new Date(sorted[i - 1]) - new Date(sorted[i])) / 86400000;
+    if (diff === 1) streak++;
+    else break;
+  }
+  return streak;
+}
+
+function updateProgress() {
+  const total = 90;
+  const done = completedDays.length;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('progress-label').textContent = `DAY ${done} / ${total}`;
+  document.getElementById('progress-stats').textContent = `${pct}% complete`;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('streak-badge').textContent = `🔥 ${calcStreak()} day streak`;
+
+  // Estimate completion date
+  const estEl = document.getElementById('estimate-badge');
+  if (done === 0) {
+    estEl.textContent = '📅 Start day 1 to see estimate';
+  } else {
+    // Track start date
+    if (!startDate) {
+      startDate = new Date().toISOString().slice(0, 10);
+      saveState('start_date', startDate);
+    }
+    const start = new Date(startDate);
+    const now = new Date();
+    const daysElapsed = Math.max(1, Math.ceil((now - start) / 86400000));
+    const pace = done / daysElapsed; // days completed per calendar day
+    const remaining = total - done;
+    const estDaysLeft = Math.ceil(remaining / pace);
+    const estDate = new Date(now.getTime() + estDaysLeft * 86400000);
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const dateStr = `${months[estDate.getMonth()]} ${estDate.getDate()}, ${estDate.getFullYear()}`;
+
+    if (done >= total) {
+      estEl.textContent = '🏆 COMPLETED!';
+      estEl.style.borderColor = 'rgba(0,200,150,0.5)';
+      estEl.style.color = 'var(--accent)';
+    } else if (pace >= 1) {
+      estEl.textContent = `📅 Finish by ${dateStr}`;
+    } else {
+      estEl.textContent = `📅 ${dateStr} at current pace (${pace.toFixed(1)}/day)`;
+    }
+  }
+
+  // Update XP display
+  recalcXP();
+  const current = getCurrentLevel();
+  const next = getNextLevel();
+  const badge = document.getElementById('level-badge');
+  badge.className = 'level-badge ' + current.color;
+  document.getElementById('level-icon').textContent = current.icon;
+  document.getElementById('level-name').textContent = current.name.toUpperCase();
+  document.getElementById('level-num').textContent = `Lv ${current.level}`;
+  document.getElementById('xp-total').textContent = `⚡ ${totalXP} XP`;
+
+  const xpBar = document.getElementById('xp-bar-fill');
+  xpBar.className = 'xp-bar-fill ' + current.color;
+  document.getElementById('xp-current-label').textContent = `${totalXP} XP`;
+
+  if (next) {
+    const rangeXP = next.minXP - current.minXP;
+    const progressXP = totalXP - current.minXP;
+    const xpPct = Math.min(100, Math.round((progressXP / rangeXP) * 100));
+    xpBar.style.width = xpPct + '%';
+    document.getElementById('xp-next-label').textContent = `${next.minXP - totalXP} XP to ${next.name}`;
+  } else {
+    xpBar.style.width = '100%';
+    document.getElementById('xp-next-label').textContent = 'MAX LEVEL! 🏆';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  document.documentElement.setAttribute('data-theme', isLight ? 'dark' : 'light');
+  document.querySelector('.theme-toggle').textContent = isLight ? '🌙' : '☀️';
+  saveState('theme', isLight ? 'dark' : 'light');
+}
+
+function initTheme() {
+  const saved = loadState('theme', 'dark');
+  document.documentElement.setAttribute('data-theme', saved);
+  const btn = document.querySelector('.theme-toggle');
+  if (btn) btn.textContent = saved === 'light' ? '☀️' : '🌙';
+}
+
+// ═══════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════
+function handleSearch(query) {
+  const clearBtn = document.getElementById('search-clear');
+  const countEl = document.getElementById('search-results-count');
+  const resultsEl = document.getElementById('search-results');
+  const planEl = document.getElementById('tab-plan');
+
+  if (!query.trim()) {
+    clearBtn.classList.remove('visible');
+    countEl.style.display = 'none';
+    resultsEl.style.display = 'none';
+    resultsEl.innerHTML = '';
+    planEl.style.display = '';
+    searchMode = false;
+    return;
+  }
+
+  clearBtn.classList.add('visible');
+  searchMode = true;
+  const q = query.toLowerCase();
+  const allDays = getAllDays();
+  const matches = allDays.filter(d => {
+    const text = [d.topic, ...d.tasks, d.resource, d.week.title, d.phase.subtitle].join(' ').toLowerCase();
+    return text.includes(q);
+  });
+
+  countEl.style.display = 'block';
+  countEl.textContent = `${matches.length} result${matches.length !== 1 ? 's' : ''} found`;
+
+  let html = '';
+  matches.forEach(d => {
+    const col = colorMap[d.color];
+    const preview = d.tasks.slice(0, 2).join(' • ');
+    const highlighted = preview.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), '<mark>$1</mark>');
+    html += `<div class="search-result-item" onclick="jumpToDay(${d.day})">
+      <div class="sr-day" style="color:${col}">DAY ${d.day} • WEEK ${d.week.week} • ${esc(d.phase.subtitle)}</div>
+      <div class="sr-topic">${esc(d.topic)}</div>
+      <div class="sr-preview">${highlighted}</div>
+    </div>`;
+  });
+
+  resultsEl.innerHTML = html;
+  resultsEl.style.display = 'block';
+  planEl.style.display = 'none';
+}
+
+function clearSearch() {
+  document.getElementById('search-input').value = '';
+  handleSearch('');
+}
+
+function jumpToDay(day) {
+  clearSearch();
+  // Find which phase/week this day belongs to
+  for (let pi = 0; pi < phases.length; pi++) {
+    for (let wi = 0; wi < phases[pi].weeks_data.length; wi++) {
+      const w = phases[pi].weeks_data[wi];
+      if (w.days.some(d => d.day === day)) {
+        activePhase = pi;
+        expandedWeek = w.week;
+        expandedDay = day;
+        renderPlan();
+        updateProgress();
+        // Scroll to it
+        setTimeout(() => {
+          const el = document.querySelector(`[data-day="${day}"]`);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        return;
+      }
+    }
+  }
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: PLAN TAB
+// ═══════════════════════════════════════════════
+function renderPlan() {
+  const phase = phases[activePhase];
+  const c = phase.color;
+  const rgb = rgbMap[c];
+  const col = colorMap[c];
+
+  let html = '';
+
+  // Phase Selector with progress
+  html += '<div class="phase-selector">';
+  phases.forEach((p, i) => {
+    const isActive = i === activePhase;
+    // Calculate phase progress
+    const phaseDays = p.weeks_data.reduce((a, w) => a + w.days.length, 0);
+    const phaseDone = p.weeks_data.reduce((a, w) => a + w.days.filter(d => completedDays.includes(d.day)).length, 0);
+    const phasePct = phaseDays ? Math.round((phaseDone / phaseDays) * 100) : 0;
+    html += `<div class="phase-card${isActive ? ' active' : ''}" data-color="${p.color}" data-phase="${i}" onclick="selectPhase(${i})" tabindex="0" role="button">
+      <div class="phase-icon">${p.icon}</div>
+      <div class="phase-title">${p.title}</div>
+      <div class="phase-subtitle">${p.subtitle}</div>
+      <div class="phase-weeks">${p.weeks}</div>
+      <div class="phase-progress"><div class="phase-progress-fill" style="width:${phasePct}%"></div></div>
+    </div>`;
+  });
+  html += '</div>';
+
+  // Phase Header
+  html += `<div class="phase-header" style="background:linear-gradient(135deg,rgba(${rgb},0.1),transparent);border:1px solid ${col}30">
+    <div class="label" style="color:${col}">${phase.title} — ${phase.weeks}</div>
+    <h2>${phase.icon} ${phase.subtitle}</h2>
+  </div>`;
+
+  // Weeks
+  phase.weeks_data.forEach((week) => {
+    const isWeekOpen = expandedWeek === week.week;
+    const weekDone = week.days.filter(d => completedDays.includes(d.day)).length;
+    html += `<div class="week-item">
+      <button class="week-btn${isWeekOpen ? ' expanded' : ''} bg-${c}-12" onclick="toggleWeek(${week.week})" tabindex="0">
+        <div class="week-top">
+          <div>
+            <div class="week-label" style="color:${col}">WEEK ${week.week}</div>
+            <div class="week-title">${esc(week.title)}</div>
+            <div class="week-goal">🎯 ${esc(week.goal)}</div>
+            <div class="week-progress-mini">${weekDone}/${week.days.length} days complete</div>
+          </div>
+          <span class="arrow" style="color:${col}">▼</span>
+        </div>
+      </button>
+      <div class="days-container${isWeekOpen ? ' open' : ''}">`;
+
+    week.days.forEach((day) => {
+      const isDayOpen = expandedDay === day.day;
+      const isDone = completedDays.includes(day.day);
+      const diffClass = day.difficulty || 'easy';
+      const diffLabel = diffClass.charAt(0).toUpperCase() + diffClass.slice(1);
+      const note = dayNotes[day.day] || '';
+
+      html += `
+        <button class="day-btn" onclick="toggleDay(${day.day})" data-day="${day.day}" tabindex="0">
+          <div class="day-left">
+            <div class="day-check${isDone ? ' done' : ''}" onclick="toggleDayComplete(${day.day}, event)" title="Mark complete">${isDone ? '✓' : ''}</div>
+            <span class="day-num" style="color:${col}">DAY ${day.day}</span>
+            <span class="day-topic">${esc(day.topic)}</span>
+          </div>
+          <div class="day-meta">
+            <span class="day-diff ${diffClass}">${diffLabel}</span>
+            <span class="day-time">⏱ ${day.time || '2h'}</span>
+            <span class="day-plus">${isDayOpen ? '−' : '+'}</span>
+          </div>
+        </button>
+        <div class="day-details${isDayOpen ? ' open' : ''}">
+          <div>
+            <div class="tasks-label">✅ TASKS</div>
+            ${day.tasks.map(t => `<div class="task-row"><span class="diamond" style="color:${col}">◆</span><span class="task-text">${esc(t)}</span></div>`).join('')}
+          </div>
+          <div class="resource-box" style="background:rgba(${rgb},0.08);border:1px solid ${col}25">
+            <span class="res-label">🔗 RESOURCE: </span>
+            <span class="res-link" style="color:${col}">${esc(day.resource)}</span>
+          </div>
+          <div class="notes-section">
+            <div class="notes-label">📝 YOUR NOTES</div>
+            <textarea class="notes-textarea" id="note-${day.day}" placeholder="Add your notes for this day..." oninput="saveNote(${day.day})">${esc(note)}</textarea>
+          </div>
+        </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  // What's Next section (shown at end of Phase 4)
+  if (activePhase === 3) {
+    html += `<div class="next-steps">
+      <h3>🚀 What's After Day 90?</h3>
+      <div class="next-step-card">
+        <span class="next-step-icon">🐍</span>
+        <div class="next-step-info">
+          <h4>Learn Python (Pandas)</h4>
+          <p>The #1 skill gap for most analysts. Pandas lets you do everything Excel does, at scale. Start with Kaggle's free Python course.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <span class="next-step-icon">📊</span>
+        <div class="next-step-info">
+          <h4>Advanced Power BI / Tableau</h4>
+          <p>Learn Row-Level Security, Paginated Reports, and R/Python visuals in Power BI. Or pick up Tableau — many companies use both.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <span class="next-step-icon">🗃️</span>
+        <div class="next-step-info">
+          <h4>Advanced SQL</h4>
+          <p>CTEs, recursive queries, stored procedures, query optimization. Practice on LeetCode SQL or DataLemur.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <span class="next-step-icon">📈</span>
+        <div class="next-step-info">
+          <h4>Statistics & A/B Testing</h4>
+          <p>Learn hypothesis testing, confidence intervals, and correlation. Khan Academy's statistics course is free and excellent.</p>
+        </div>
+      </div>
+      <div class="next-step-card">
+        <span class="next-step-icon">☁️</span>
+        <div class="next-step-info">
+          <h4>Cloud & Big Data</h4>
+          <p>Google BigQuery (free tier), AWS basics, or Azure Data Factory. Cloud skills are increasingly expected for analyst roles.</p>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('tab-plan').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: PROJECTS TAB
+// ═══════════════════════════════════════════════
+function renderProjects() {
+  let html = `<div class="projects-header">
+    <h2>🗂 Your 9 Portfolio Projects</h2>
+    <p>These real-world projects demonstrate your skills to employers. Build every single one.</p>
+  </div>`;
+
+  projectsData.forEach((p) => {
+    const isPowerBI = p.tool.includes('Power BI');
+    const isSQL = p.tool === 'SQL';
+    const isMulti = p.tool.includes('+');
+    const tc = isPowerBI ? 'purple' : isSQL ? 'blue' : 'accent';
+    const col = colorMap[tc];
+    const rgb = rgbMap[tc];
+    const icon = p.num <= 4 ? '📊' : p.num <= 6 ? '🗄️' : p.num === 9 ? '🏆' : '📈';
+
+    html += `<div class="project-card">
+      <div class="project-icon" style="background:${isMulti ? `linear-gradient(135deg,${colorMap.accent}30,${colorMap.blue}30)` : `rgba(${rgb},0.12)`}">${icon}</div>
+      <div class="project-info">
+        <div class="project-title-row">
+          <span class="project-name">Project ${p.num}: ${esc(p.title)}</span>
+          <span class="project-tool" style="background:rgba(${rgb},0.15);color:${col}">${esc(p.tool)}</span>
+        </div>
+        <div class="project-week">📅 ${p.week}</div>
+        <div class="project-desc">${esc(p.desc)}</div>
+      </div>
+    </div>`;
+  });
+
+  html += `<div class="portfolio-tip">
+    <div class="tip-title">💡 Portfolio Tip</div>
+    <div class="tip-text">Upload all SQL files to GitHub. Publish Power BI reports to the free Power BI Service. Add links to your resume and LinkedIn. A recruiter who can <em>see</em> your work is 10× more likely to call you for an interview.</div>
+  </div>`;
+
+  document.getElementById('tab-projects').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: RESOURCES TAB
+// ═══════════════════════════════════════════════
+function renderResources() {
+  let html = `<div class="resources-header">
+    <h2>🔗 Free Learning Resources</h2>
+    <p>Everything you need — 100% free. No paid courses required.</p>
+  </div>`;
+
+  resources.forEach((cat) => {
+    const tc = cat.category === 'Excel' ? 'accent' : cat.category === 'SQL' ? 'blue' : cat.category === 'Power BI' ? 'purple' : 'gold';
+    const col = colorMap[tc];
+
+    html += `<div class="resource-section">
+      <div class="cat-label" style="color:${col}">${cat.category.toUpperCase()}</div>
+      ${cat.items.map(item => `<div class="resource-item"><span class="bullet" style="color:${col}">▸</span><span class="item-text">${esc(item)}</span></div>`).join('')}
+    </div>`;
+  });
+
+  document.getElementById('tab-resources').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// RENDER: JOBS TAB
+// ═══════════════════════════════════════════════
+function renderJobs() {
+  const accent = colorMap.accent;
+  const blue = colorMap.blue;
+  const purple = colorMap.purple;
+  const gold = colorMap.gold;
+
+  let html = `<div class="job-header">
+    <h2>💼 Job Preparation Guide</h2>
+    <p>Everything you need to land your first Data Analyst role.</p>
+  </div>`;
+
+  // Resume Checklist
+  html += `<div class="job-section">
+    <div class="section-label" style="color:${accent}">📄 RESUME CHECKLIST</div>
+    ${["1-page clean template (use Novoresume.com – free)", "Headline: 'Aspiring Data Analyst | Excel | SQL | Power BI'", "Professional Summary: 3 lines — skills, experience, goal", "Skills Section: Excel, SQL, Power BI, Data Cleaning, Data Visualization, Dashboard Design", "Projects Section: All 9 projects with tools + outcomes", "Add GitHub link + Power BI report link", "Keep it simple: no photos, no graphics — clean text layout"].map(item => `<div class="checklist-row"><span class="check" style="color:${accent}">☐</span><span class="check-text">${esc(item)}</span></div>`).join('')}
+  </div>`;
+
+  // Interview Questions
+  const questions = [
+    ["Excel", "What is a Pivot Table and when would you use it?"],
+    ["Excel", "Difference between VLOOKUP and INDEX-MATCH?"],
+    ["Excel", "How do you remove duplicates in Excel?"],
+    ["SQL", "Difference between WHERE and HAVING?"],
+    ["SQL", "INNER JOIN vs LEFT JOIN — explain with example."],
+    ["SQL", "How do you find the 2nd highest salary?"],
+    ["SQL", "What are window functions? Give an example."],
+    ["Power BI", "What is DAX? What measures have you created?"],
+    ["Power BI", "Explain your dashboard project end-to-end."],
+    ["Power BI", "What is a Star Schema? Why is it used?"],
+    ["General", "Tell me about yourself."],
+    ["General", "Why do you want to become a Data Analyst?"],
+    ["General", "Walk me through how you would analyze a sales drop."],
+    ["General", "What is the difference between data cleaning and data analysis?"],
+    ["General", "Where do you see yourself in 2 years?"],
+  ];
+
+  html += `<div class="job-section">
+    <div class="section-label" style="color:${blue}">🎤 TOP INTERVIEW QUESTIONS</div>
+    ${questions.map(([cat, q]) => {
+      const c = cat === 'Excel' ? 'accent' : cat === 'SQL' ? 'blue' : cat === 'Power BI' ? 'purple' : 'gold';
+      const col = colorMap[c];
+      const rgb = rgbMap[c];
+      return `<div class="interview-row"><span class="interview-tag" style="color:${col};background:rgba(${rgb},0.12)">${esc(cat)}</span><span class="interview-q">${esc(q)}</span></div>`;
+    }).join('')}
+  </div>`;
+
+  // When & How to Apply
+  const applyItems = [
+    ["⏰ When to Start Applying", "Start applying from Day 78 onwards. Don't wait until you feel '100% ready' — you'll never feel ready. Apply early, learn from interviews."],
+    ["🔍 Where to Apply", "Naukri.com • LinkedIn Jobs • Indeed.com • Internshala (for fresher roles) • AngelList (for startups) • Company career pages directly"],
+    ["🎯 What to Search", "Search terms: 'Data Analyst fresher', 'Junior Data Analyst', 'Business Analyst fresher', 'MIS Analyst', 'Reporting Analyst', 'Data Entry + Analytics' — these entry-level roles are stepping stones."],
+    ["📬 Application Strategy", "Apply to 5 jobs every day. Customize your resume summary for each role. In cover letters, mention specific tools and your projects by name."],
+    ["🤝 LinkedIn Networking", "Connect with Data Analysts and send a simple message: 'Hi, I am learning Data Analytics and would love 5 minutes of your time for career advice.' Most people will reply."],
+    ["📈 After You Get Interviews", "Do mock interviews with a friend or record yourself on video. Practice until you can explain every project in 2 minutes without notes."],
+  ];
+
+  html += `<div class="job-section">
+    <div class="section-label" style="color:${gold}">🚀 WHEN & HOW TO APPLY</div>
+    ${applyItems.map(([title, desc]) => `<div class="apply-item" style="border-left-color:${gold}40"><div class="apply-title" style="color:${gold}">${esc(title)}</div><div class="apply-desc">${esc(desc)}</div></div>`).join('')}
+  </div>`;
+
+  // Daily Schedule
+  html += `<div class="schedule-box">
+    <div class="sched-label">🗓 SUGGESTED DAILY SCHEDULE (While Working)</div>
+    ${[["7:00–7:30 AM", "Morning Review — re-read yesterday's notes (30 min)"], ["After Work", "Study Block 1 — learn new concept (60 min)"], ["After Study 1", "Break — eat, rest, walk (20 min)"], ["Evening", "Study Block 2 — practice/project work (60 min)"], ["Before Bed", "Quick recap — write 3 things you learned today (10 min)"]].map(([time, task]) => `<div class="schedule-row"><span class="sched-time">${esc(time)}</span><span class="sched-task">${esc(task)}</span></div>`).join('')}
+  </div>`;
+
+  document.getElementById('tab-jobs').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════
+// INTERACTIONS
+// ═══════════════════════════════════════════════
+function selectPhase(i) {
+  activePhase = i;
+  expandedWeek = null;
+  expandedDay = null;
+  renderPlan();
+  updateHash();
+}
+
+function toggleWeek(week) {
+  expandedWeek = expandedWeek === week ? null : week;
+  expandedDay = null;
+  renderPlan();
+}
+
+function toggleDay(day) {
+  expandedDay = expandedDay === day ? null : day;
+  renderPlan();
+  if (expandedDay) {
+    setTimeout(() => {
+      const el = document.querySelector(`[data-day="${day}"]`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+  }
+}
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    window.location.hash = btn.dataset.tab !== 'plan' ? btn.dataset.tab : '';
+  });
+});
+
+// ═══════════════════════════════════════════════
+// URL HASH ROUTING
+// ═══════════════════════════════════════════════
+function updateHash() {
+  // Don't update hash during plan view
+}
+
+function handleHash() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return;
+
+  // tab:plan, tab:projects, tab:resources, tab:jobs
+  const tabNames = ['plan', 'projects', 'resources', 'jobs'];
+  if (tabNames.includes(hash)) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    const btn = document.querySelector(`[data-tab="${hash}"]`);
+    if (btn) btn.classList.add('active');
+    document.getElementById('tab-' + hash).classList.add('active');
+    return;
+  }
+
+  // day:N
+  const dayMatch = hash.match(/^day:(\d+)$/);
+  if (dayMatch) {
+    jumpToDay(parseInt(dayMatch[1]));
+    return;
+  }
+
+  // phase:N
+  const phaseMatch = hash.match(/^phase:(\d+)$/);
+  if (phaseMatch) {
+    const pi = parseInt(phaseMatch[1]) - 1;
+    if (pi >= 0 && pi < phases.length) selectPhase(pi);
+  }
+}
+
+// ═══════════════════════════════════════════════
+// KEYBOARD NAVIGATION
+// ═══════════════════════════════════════════════
+document.addEventListener('keydown', (e) => {
+  // Ctrl+K → focus search
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+    e.preventDefault();
+    document.getElementById('search-input').focus();
+    return;
+  }
+
+  // Escape → clear search or collapse
+  if (e.key === 'Escape') {
+    if (searchMode) { clearSearch(); return; }
+    if (expandedDay) { expandedDay = null; renderPlan(); return; }
+    if (expandedWeek) { expandedWeek = null; renderPlan(); return; }
+  }
+
+  // Don't handle arrow keys if typing in input/textarea
+  if (['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+  const allDays = getAllDays();
+  const currentIdx = allDays.findIndex(d => d.day === expandedDay);
+
+  if (e.key === 'ArrowDown' || e.key === 'j') {
+    e.preventDefault();
+    const next = currentIdx < allDays.length - 1 ? currentIdx + 1 : 0;
+    jumpToDay(allDays[next].day);
+  }
+  if (e.key === 'ArrowUp' || e.key === 'k') {
+    e.preventDefault();
+    const prev = currentIdx > 0 ? currentIdx - 1 : allDays.length - 1;
+    jumpToDay(allDays[prev].day);
+  }
+  if (e.key === 'Enter' && document.activeElement.classList.contains('day-btn')) {
+    document.activeElement.click();
+  }
+  if (e.key === 'Enter' && document.activeElement.classList.contains('week-btn')) {
+    document.activeElement.click();
+  }
+  if (e.key === 'Enter' && document.activeElement.classList.contains('phase-card')) {
+    document.activeElement.click();
+  }
+});
+
+// Search input listener
+document.getElementById('search-input').addEventListener('input', (e) => {
+  handleSearch(e.target.value);
+});
+
+// ═══════════════════════════════════════════════
+// DAILY MOTIVATIONAL QUOTES
+// ═══════════════════════════════════════════════
+const QUOTES = [
+  { text: "Data is the new oil, but analytics is the refinery.", author: "Clive Humby" },
+  { text: "Without data, you're just another person with an opinion.", author: "W. Edwards Deming" },
+  { text: "The goal is to turn data into information, and information into insight.", author: "Carly Fiorina" },
+  { text: "Data really powers everything that we do.", author: "Jeff Weiner" },
+  { text: "Information is the oil of the 21st century, and analytics is the combustion engine.", author: "Peter Sondergaard" },
+  { text: "It is a capital mistake to theorize before one has data.", author: "Arthur Conan Doyle" },
+  { text: "Data beats emotions. Every single time.", author: "Sean Rad" },
+  { text: "The world is one big data problem.", author: "Andrew McAfee" },
+  { text: "Errors using inadequate data are much less than those using no data at all.", author: "Charles Babbage" },
+  { text: "Data is a precious thing and will last longer than the systems themselves.", author: "Tim Berners-Lee" },
+  { text: "Torture the data, and it will confess to anything.", author: "Ronald Coase" },
+  { text: "The most valuable commodity I know of is information.", author: "Gordon Gekko" },
+  { text: "Bad data is worse than no data at all.", author: "Unknown" },
+  { text: "In God we trust. All others must bring data.", author: "W. Edwards Deming" },
+  { text: "You can have data without information, but you cannot have information without data.", author: "Daniel Keys Moran" },
+  { text: "Data scientists are involved with gathering data, massaging it, and most importantly, extracting insights from it.", author: "DJ Patil" },
+  { text: "The ability to take data — to be able to understand it, to process it, to extract value from it — is going to be hugely important.", author: "John Doerr" },
+  { text: "Think analytically, rigorously, and systematically about a problem.", author: "Michael Bloomberg" },
+  { text: "What we found is that the combination of human plus machine is more powerful than either by itself.", author: "Garry Kasparov" },
+  { text: "Every day, three times per second, we produce the equivalent of the amount of all the information stored in the US Library of Congress.", author: "Hilary Mason" },
+  { text: "The price of doing the same old thing is far higher than the price of change.", author: "Bill Clinton" },
+  { text: "Small data is the new big data. It's about finding meaningful patterns in the everyday.", author: "Martin Lindstrom" },
+  { text: "Numbers have an important story to tell. They rely on you to give them a clear and convincing voice.", author: "Stephen Few" },
+  { text: "A data scientist is someone who is better at statistics than any software engineer and better at software engineering than any statistician.", author: "Josh Wills" },
+  { text: "If you can't explain it simply, you don't understand it well enough.", author: "Albert Einstein" },
+  { text: "No amount of sophistication is going to allay the fact that all your data is wrong.", author: "John Tukey" },
+  { text: "Motivation is what gets you started. Habit is what keeps you going.", author: "Jim Rohn" },
+  { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+  { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+  { text: "An investment in knowledge pays the best interest.", author: "Benjamin Franklin" },
+];
+
+function showDailyQuote() {
+  // Use day of year as seed so same quote shows all day, changes daily
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((now - start) / 86400000);
+  const quote = QUOTES[dayOfYear % QUOTES.length];
+  document.getElementById('quote-text').textContent = `"${quote.text}"`;
+  document.getElementById('quote-author').textContent = `— ${quote.author}`;
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+initTheme();
+showDailyQuote();
+renderPlan();
+renderProjects();
+renderResources();
+renderJobs();
+renderAchievements();
+updateProgress();
+handleHash();
+window.addEventListener('hashchange', handleHash);
+</script>
+</body>
+</html>
